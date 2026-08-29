@@ -7,6 +7,7 @@ class CityRepository {
             const city = await City.create({ name });
             return city
         } catch (error) {
+            console.log("Somthing went wrong in the repository layer")
             throw {error};
         }
     }
@@ -19,6 +20,7 @@ class CityRepository {
             });
         return true;
         } catch (error) {
+            console.log("Somthing went wrong in the repository layer")
             throw {error};
         }
     }
@@ -31,6 +33,7 @@ class CityRepository {
             });
             return city;
         } catch (error) {
+            console.log("Somthing went wrong in the repository layer")
             throw {error};
         }
     }
@@ -39,6 +42,7 @@ class CityRepository {
             await City.findByPk(cityId);
             return City;
         } catch (error) {
+            console.log("Somthing went wrong in the repository layer")
             throw {error};
         }
     }
