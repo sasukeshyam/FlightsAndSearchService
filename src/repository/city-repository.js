@@ -26,11 +26,18 @@ class CityRepository {
     }
     async updateCity( cityId, data ) {
         try {
-            const city = await City.update( data, {
-                where: {
-                    id: cityId
-                }
-            });
+            // The below approach also work but will not return the updated object
+            // if we are useing Postgess then (returning: true) can be used, else not 
+            // const city = await City.update( data, {
+            //     where: {
+            //         id: cityId
+            //     }
+            // });
+            // return city;
+            // For getting updated data in mysql we use the below approach
+            const city = await City.findByPk(cityId);
+            city.name = data.name;
+            await city.save();
             return city;
         } catch (error) {
             console.log("Somthing went wrong in the repository layer")
