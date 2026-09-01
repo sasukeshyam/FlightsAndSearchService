@@ -23,7 +23,7 @@
  and then execute
 
  `npm sequelize db:migrate`
- 
+
  ```
 
 
@@ -38,3 +38,10 @@
 Flights
  - A city has many airports but one airport belong to a city
  - one airport can have many flight, but a flight belong to one airport
+
+
+ ## Tables
+
+ ### City -> id, name, created_at, updated_at
+ ### Airport -> id, name, address, city_id, created_at, updated_at
+     Relationship -> City has many Airport and Airport belong to a city (one to many)
