@@ -78,6 +78,19 @@ class CityRepository {
             throw {error};
         }
     }
+
+    async createBulk(cityData) {
+        try {
+            const cities = await City.bulkCreate(cityData, {
+                validate: true
+            });
+
+            return cities;
+        } catch (error) {
+            console.log("Somthing went wrong in the repository layer")
+            throw {error};
+        }
+    }
 }
 
 module.exports = CityRepository;

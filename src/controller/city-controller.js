@@ -86,6 +86,8 @@ const get = async (req, res) => {
         })
     }
 }
+
+//get -> /city
 const getAll = async (req, res) => {
     try {
         const cities = await cityService.getAllCities(req.query);
@@ -106,10 +108,46 @@ const getAll = async (req, res) => {
     }
 }
 
+const bulkCity = async (req, res) => {
+    try {
+        const cityData = req.body;
+
+         // 1. Validation check to ensure an array was provided
+        if (!Array.isArray(cityData) || cityData.length === 0){
+            return res.status(400).json({
+                data: {},
+                success: false,
+                message: 'Request body must be a non-empty array of items.',
+                err: {}
+            });
+        }
+
+        // 2. Insert records efficiently using bulkCreate
+        const cities = await cityService.bulkCreate(cityData)
+
+        return res.status(201).json({
+            data: cities,
+            success: true,
+            message: `${cities.length} bulk city records successfully created!`,
+            err: {}
+        })
+    } catch (error) {
+        console.error('Bulk insertion failed:', error);
+
+        return res.status(500).json({
+            data: {},
+            success: false,
+            message: 'Internal server error',
+            err: error
+        });
+    }
+}
+
 module.exports = {
     create,
     destroy,
     update,
     get,
-    getAll
+    getAll,
+    bulkCity
 };
