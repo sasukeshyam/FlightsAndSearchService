@@ -12,6 +12,7 @@ router.patch('/city/:id', CityController.update);
 router.get('/city/:id', CityController.get);
 router.get('/city', CityController.getAll);
 router.post('/city/bulk', CityController.bulkCity);
+router.post('/city/airport/:id', CityController.getAirportOfCity);
 
 // airport routes
 router.post('/airport', AirportController.createAirport);
