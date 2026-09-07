@@ -1,6 +1,6 @@
 const {FlightRepository, AirplaneRepository} = require('../repository/index');
 
-const compareTime  = require('../utils/helper')
+const {compareTime}  = require('../utils/helper')
 
 class FlightService {
 
@@ -11,8 +11,8 @@ class FlightService {
 
     async createFlight(data) {
         try {
-            if(!compareTime(data.arrivalTime > data.departureTime)){
-                throw {error: 'Arrival time cannot be less then departure time'};
+            if(!compareTime(data.arrivalTime, data.departureTime)){
+                throw new {error: 'Arrival time cannot be less then departure time'};
             }
             const airplane = await this.airplaneRepository.getAirplane(data.airplaneId)
             const flight = await this.flightRepository.createFlight({
@@ -20,7 +20,47 @@ class FlightService {
             })
             return flight
         } catch (error) {
-            console.log('Something went wrong in city service')
+            console.log('Something went wrong in flight service')
+            throw {error}
+        }
+    }
+
+    async deleteFlight(flightId) {
+        try {
+            const response = await this.flightRepository.deleteFlight(flightId)
+            return response
+        } catch (error) {
+            console.log('Something went wrong in flight service')
+            throw {error}
+        }
+    }
+
+    async getFlight(flightId) {
+        try {
+            const flight = await this.flightRepository.getFlight(flightId)
+            return flight
+        } catch (error) {
+            console.log('Something went wrong in flight service')
+            throw {error}
+        }
+    }
+
+    async updateFlight(flightId, data) {
+        try {
+            const flight = await this.flightRepository.updateFlight(flightId, data)
+            return flight
+        } catch (error) {
+            console.log('Something went wrong in flight service')
+            throw {error}
+        }
+    }
+
+    async getAllFlightData(data) {
+        try {
+            const flight = await this.flightRepository.getAllFlights(data);
+            return flight;
+        } catch (error) {
+            console.log('Something went wrong in flight service')
             throw {error}
         }
     }
