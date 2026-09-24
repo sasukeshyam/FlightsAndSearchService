@@ -33,8 +33,8 @@ router.get('/airplane/:id', AirplaneController.getAirplane);
 // flight routes
 router.post('/flights',FlightMiddlewares.validateCreateFlight ,FlightController.createFlight);
 router.delete('/flights/:id', FlightController.deleteFlight);
-router.patch('/flights/:id', FlightController.getFlight);
-router.get('/flights/:id', FlightController.getFlight);
+router.patch('/flights/:id', FlightController.updateFlight);
+router.get('/flight/:id', FlightController.getFlight);
 router.get('/flights', FlightController.getAll);
 
 module.exports = router;

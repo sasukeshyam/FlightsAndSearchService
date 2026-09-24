@@ -66,20 +66,24 @@ class FlightRepository {
                 return null
             }
 
-            flight.flightNumber = data.flightNumber
-            flight.airplaneId = data.airplaneId
-            flight.departureAirportId = data.departureAirportId
-            flight.arrivalAirportId = data.arrivalAirportId
-            flight.arrivalTime = data.arrivalTime
-            flight.departureTime = data.departureTime
-            flight.price = data.price
-            flight.totalSeats = data.totalSeats
+            // flight.flightNumber = data.flightNumber
+            // flight.airplaneId = data.airplaneId
+            // flight.departureAirportId = data.departureAirportId
+            // flight.arrivalAirportId = data.arrivalAirportId
+            // flight.arrivalTime = data.arrivalTime
+            // flight.departureTime = data.departureTime
+            // flight.price = data.price
+            // flight.totalSeats = data.totalSeats
 
-            await flight.save()
-            return flight
+            // await flight.save()
+            // return flight
+
+            await flight.update(data);
+
+            return flight;
         } catch (error) {
-            console.log("Something went wrong in he repository layer");
-            throw {error};
+            console.log("Something went wrong in he2 repository layer");
+            throw error;
         }
     }
 
@@ -108,18 +112,3 @@ class FlightRepository {
 }
 
 module.exports = FlightRepository;
-
-
-
-/**
- * {
-    * flightNumber
-    * airplaneId
-    * departureAirportId
-    * arrivalAirportId
-    * arrivalTime
-    * departureTime
-    * price
-    * totalSeats -> airplane
- * }
- */
